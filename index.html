@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>Clothing Store — Billing</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <style>
@@ -10,8 +10,8 @@
 
     :root {
       --orange: #f97316;
-      --orange-light: #fff7ed;
       --orange-dark: #c2410c;
+      --orange-light: #fff7ed;
       --green: #16a34a;
       --green-light: #f0fdf4;
       --red: #dc2626;
@@ -33,47 +33,30 @@
 
     body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; }
 
-    /* ── LOGIN ── */
-    #login-screen {
-      min-height: 100vh;
-      display: flex;
-      background: var(--bg);
-    }
+    /* ─── LOGIN ─── */
+    #login-screen { min-height: 100vh; display: flex; }
 
     .login-left {
-      flex: 1;
-      background: linear-gradient(145deg, #f97316 0%, #ea580c 40%, #c2410c 100%);
+      flex: 1; background: linear-gradient(145deg, #f97316 0%, #ea580c 50%, #c2410c 100%);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 48px; color: #fff; gap: 24px;
+      padding: 48px; color: #fff; gap: 20px;
     }
-
-    .login-left .big-icon { font-size: 72px; opacity: 0.9; }
-    .login-left h1 { font-size: 32px; font-weight: 700; text-align: center; line-height: 1.2; }
+    .login-left .big-icon { font-size: 68px; }
+    .login-left h1 { font-size: 30px; font-weight: 700; text-align: center; line-height: 1.2; }
     .login-left p  { font-size: 15px; opacity: 0.85; text-align: center; max-width: 280px; line-height: 1.6; }
+    .login-badges  { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .login-badge   { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 5px 14px; font-size: 12px; font-weight: 600; }
 
-    .login-badges { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-    .login-badge  { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 500; }
-
-    .login-right {
-      width: 420px; display: flex; align-items: center; justify-content: center;
-      padding: 48px 40px; background: #fff;
-    }
-
+    .login-right { width: 420px; display: flex; align-items: center; justify-content: center; padding: 48px 40px; background: #fff; }
     .login-form { width: 100%; }
-    .login-form .top-tag {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--orange-light); color: var(--orange);
-      font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px;
-      margin-bottom: 24px;
-    }
-    .login-form h2 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
-    .login-form .sub { font-size: 14px; color: var(--text2); margin-bottom: 32px; }
+    .top-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--orange-light); color: var(--orange); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 20px; }
+    .login-form h2 { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+    .login-form .sub { font-size: 14px; color: var(--text2); margin-bottom: 28px; }
 
-    .field { margin-bottom: 18px; }
-    .field label { display: block; font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 6px; letter-spacing: 0.04em; text-transform: uppercase; }
-
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 11px; font-weight: 700; color: var(--text2); margin-bottom: 6px; letter-spacing: 0.05em; text-transform: uppercase; }
     .input-wrap { position: relative; }
-    .input-wrap i.ico { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); font-size: 17px; color: var(--text3); }
+    .input-wrap i.ico { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); font-size: 17px; color: var(--text3); pointer-events: none; }
     .input-wrap input {
       width: 100%; padding: 12px 13px 12px 40px;
       background: var(--bg); border: 1.5px solid var(--border2);
@@ -84,247 +67,131 @@
     .input-wrap input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(249,115,22,0.12); }
     .eye-btn { position: absolute; right: 11px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text3); cursor: pointer; font-size: 17px; padding: 2px; }
 
-    .login-btn {
-      width: 100%; padding: 13px;
-      background: var(--orange); color: #fff; border: none;
-      border-radius: var(--radius-sm); font-size: 15px; font-weight: 700;
-      cursor: pointer; font-family: inherit; margin-top: 6px;
-      transition: background 0.15s, transform 0.1s;
-    }
-    .login-btn:hover  { background: var(--orange-dark); }
-    .login-btn:active { transform: scale(0.98); }
-
+    .login-btn { width: 100%; padding: 13px; background: var(--orange); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 6px; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .login-btn:hover { background: var(--orange-dark); }
     .login-error { font-size: 13px; color: var(--red); margin-top: 10px; text-align: center; display: none; background: var(--red-light); padding: 8px 12px; border-radius: 7px; }
 
-    @media (max-width: 680px) { .login-left { display: none; } .login-right { width: 100%; } }
+    /* ─── APP ─── */
+    #app-screen { display: none; }
 
-    /* ── APP ── */
-    #app-screen { display: none; height: 100vh; flex-direction: column; }
-
-    /* topbar */
+    /* TOPBAR */
     .topbar {
       height: 56px; background: #fff; border-bottom: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 20px; flex-shrink: 0; gap: 12px;
+      padding: 0 20px; position: sticky; top: 0; z-index: 100;
     }
-
-    .topbar-left { display: flex; align-items: center; gap: 12px; }
     .brand { display: flex; align-items: center; gap: 9px; }
     .brand .dot { width: 32px; height: 32px; background: var(--orange); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
     .brand .dot i { font-size: 17px; color: #fff; }
     .brand-name { font-size: 15px; font-weight: 700; }
-    .breadcrumb { font-size: 12px; color: var(--text3); }
-    .breadcrumb span { color: var(--orange); font-weight: 500; }
+    .brand-sub  { font-size: 11px; color: var(--text3); }
 
     .topbar-right { display: flex; align-items: center; gap: 10px; }
-
-    .topbar-btn {
-      display: flex; align-items: center; gap: 6px;
-      padding: 7px 14px; border-radius: var(--radius-sm);
-      border: 1.5px solid var(--border2); background: #fff;
-      font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; color: var(--text2);
-      transition: background 0.12s, border-color 0.12s;
-    }
-    .topbar-btn:hover { background: var(--bg); border-color: var(--border2); }
-    .topbar-btn i { font-size: 16px; }
-
-    .new-btn {
-      display: flex; align-items: center; gap: 6px;
-      padding: 8px 16px; border-radius: var(--radius-sm);
-      background: var(--orange); color: #fff; border: none;
-      font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit;
-      transition: background 0.12s;
-    }
-    .new-btn:hover { background: var(--orange-dark); }
-
-    .avatar { width: 32px; height: 32px; background: var(--orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; cursor: pointer; position: relative; }
+    .topbar-date  { font-size: 12px; color: var(--text2); }
+    .avatar { width: 32px; height: 32px; background: var(--orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; cursor: pointer; position: relative; flex-shrink: 0; }
     .avatar .online-dot { width: 9px; height: 9px; background: #22c55e; border: 2px solid #fff; border-radius: 50%; position: absolute; bottom: 0; right: 0; }
 
-    /* stats */
-    .stats-strip {
-      display: flex; gap: 14px; padding: 14px 20px 0; flex-shrink: 0;
-    }
-
-    .scard {
-      flex: 1; background: #fff; border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 14px 16px;
-      display: flex; align-items: center; gap: 12px;
-    }
-
-    .scard .s-icon { width: 38px; height: 38px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    /* STATS */
+    .stats-strip { display: flex; gap: 12px; padding: 14px 20px 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .stats-strip::-webkit-scrollbar { display: none; }
+    .scard { flex: 1; min-width: 140px; background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .scard .s-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
     .scard.sc1 .s-icon { background: var(--orange-light); color: var(--orange); }
     .scard.sc2 .s-icon { background: var(--green-light);  color: var(--green);  }
     .scard.sc3 .s-icon { background: var(--blue-light);   color: var(--blue);   }
-
-    .scard .s-lbl { font-size: 11px; color: var(--text2); font-weight: 500; margin-bottom: 2px; }
-    .scard .s-val { font-size: 20px; font-weight: 700; }
+    .s-lbl { font-size: 11px; color: var(--text2); font-weight: 500; margin-bottom: 2px; }
+    .s-val  { font-size: 18px; font-weight: 700; }
     .scard.sc1 .s-val { color: var(--orange); }
     .scard.sc2 .s-val { color: var(--green);  }
     .scard.sc3 .s-val { color: var(--blue);   }
 
-    /* main layout */
-    .pos-layout {
-      display: grid; grid-template-columns: 1fr 370px;
-      gap: 0; flex: 1; overflow: hidden; margin-top: 14px;
-      padding: 0 20px 20px;
-      gap: 14px;
-    }
+    /* DESKTOP LAYOUT */
+    .pos-layout { display: grid; grid-template-columns: 1fr 370px; gap: 14px; padding: 14px 20px 20px; height: calc(100vh - 56px - 114px); }
 
-    /* product panel */
-    .prod-panel {
-      background: #fff; border: 1px solid var(--border);
-      border-radius: var(--radius); display: flex; flex-direction: column; overflow: hidden;
-    }
-
-    .prod-toolbar {
-      padding: 14px 16px; border-bottom: 1px solid var(--border);
-      display: flex; gap: 10px; align-items: center; flex-shrink: 0;
-    }
-
-    .search-box {
-      flex: 1; position: relative;
-    }
-    .search-box i { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 16px; color: var(--text3); }
-    .search-box input {
-      width: 100%; padding: 9px 12px 9px 36px;
-      border: 1.5px solid var(--border2); border-radius: var(--radius-sm);
-      background: var(--bg); font-size: 13px; color: var(--text);
-      outline: none; font-family: inherit;
-    }
+    .prod-panel { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; overflow: hidden; }
+    .prod-toolbar { padding: 12px 14px; border-bottom: 1px solid var(--border); display: flex; gap: 10px; flex-shrink: 0; }
+    .search-box { flex: 1; position: relative; }
+    .search-box i { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--text3); pointer-events: none; }
+    .search-box input { width: 100%; padding: 9px 12px 9px 34px; border: 1.5px solid var(--border2); border-radius: var(--radius-sm); background: var(--bg); font-size: 13px; color: var(--text); outline: none; font-family: inherit; }
     .search-box input:focus { border-color: var(--orange); }
 
-    .cats {
-      padding: 12px 16px; border-bottom: 1px solid var(--border);
-      display: flex; gap: 8px; flex-wrap: wrap; flex-shrink: 0;
-    }
-
-    .cat-pill {
-      padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 500;
-      border: 1.5px solid var(--border2); background: #fff; color: var(--text2);
-      cursor: pointer; transition: all 0.12s; font-family: inherit;
-    }
+    .cats { padding: 10px 14px; border-bottom: 1px solid var(--border); display: flex; gap: 7px; overflow-x: auto; flex-shrink: 0; -webkit-overflow-scrolling: touch; }
+    .cats::-webkit-scrollbar { display: none; }
+    .cat-pill { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1.5px solid var(--border2); background: #fff; color: var(--text2); cursor: pointer; white-space: nowrap; transition: all 0.12s; font-family: inherit; }
     .cat-pill:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-light); }
     .cat-pill.active { background: var(--orange); border-color: var(--orange); color: #fff; }
 
-    .prod-grid-wrap { flex: 1; overflow-y: auto; padding: 16px; }
+    .prod-grid-wrap { flex: 1; overflow-y: auto; padding: 14px; }
+    .prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
 
-    .prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-
-    .prod-card {
-      border: 1.5px solid var(--border); border-radius: var(--radius);
-      overflow: hidden; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s;
-      background: #fff; position: relative;
-    }
+    .prod-card { border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: all 0.15s; background: #fff; position: relative; }
     .prod-card:hover { border-color: var(--orange); box-shadow: 0 4px 16px rgba(249,115,22,0.12); transform: translateY(-2px); }
-
-    .prod-img {
-      height: 100px; display: flex; align-items: center; justify-content: center;
-      font-size: 44px; background: var(--bg);
-    }
-
-    .prod-info { padding: 10px 12px 12px; }
-    .prod-name  { font-size: 13px; font-weight: 600; margin-bottom: 6px; line-height: 1.3; }
-    .prod-price { font-size: 14px; font-weight: 700; color: var(--orange); }
-
-    .add-circle {
-      position: absolute; bottom: 10px; right: 10px;
-      width: 26px; height: 26px; background: var(--orange); color: #fff;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 700; box-shadow: 0 2px 8px rgba(249,115,22,0.4);
-    }
-
-    /* cat color accents */
+    .prod-card:active { transform: scale(0.97); }
+    .prod-img { height: 90px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
     .pc-shirts .prod-img { background: #fff7ed; }
     .pc-tops   .prod-img { background: #fdf2f8; }
     .pc-pants  .prod-img { background: #f0fdf4; }
     .pc-shoes  .prod-img { background: #eff6ff; }
     .pc-acc    .prod-img { background: #fefce8; }
+    .prod-info { padding: 9px 10px 10px; }
+    .prod-name  { font-size: 12px; font-weight: 600; margin-bottom: 4px; line-height: 1.3; }
+    .prod-price { font-size: 13px; font-weight: 700; color: var(--orange); }
+    .add-circle { position: absolute; bottom: 8px; right: 8px; width: 24px; height: 24px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; box-shadow: 0 2px 8px rgba(249,115,22,0.35); }
 
-    /* order panel */
-    .order-panel {
-      background: #fff; border: 1px solid var(--border);
-      border-radius: var(--radius); display: flex; flex-direction: column; overflow: hidden;
-    }
-
-    .order-header {
-      padding: 14px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0;
-    }
-
-    .order-search { position: relative; margin-bottom: 12px; }
-    .order-search i { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--text3); }
-    .order-search input { width: 100%; padding: 8px 12px 8px 34px; border: 1.5px solid var(--border2); border-radius: var(--radius-sm); background: var(--bg); font-size: 13px; outline: none; font-family: inherit; color: var(--text); }
-    .order-search input:focus { border-color: var(--orange); }
-
+    /* ORDER PANEL */
+    .order-panel { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; overflow: hidden; }
+    .order-header { padding: 12px 14px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .cust-row { display: flex; gap: 8px; margin-bottom: 10px; }
+    .cust-row input { flex: 1; padding: 9px 12px; border: 1.5px solid var(--border2); border-radius: var(--radius-sm); background: var(--bg); font-size: 13px; color: var(--text); outline: none; font-family: inherit; }
+    .cust-row input:focus { border-color: var(--orange); }
     .order-selects { display: flex; gap: 8px; }
-    .order-select  { flex: 1; }
-    .order-select select {
-      width: 100%; padding: 8px 10px; border: 1.5px solid var(--border2);
-      border-radius: var(--radius-sm); background: var(--bg); font-size: 12px;
-      font-family: inherit; color: var(--text2); outline: none; cursor: pointer;
-    }
-    .order-select select:focus { border-color: var(--orange); }
+    .order-selects select { flex: 1; padding: 8px 10px; border: 1.5px solid var(--border2); border-radius: var(--radius-sm); background: var(--bg); font-size: 12px; font-family: inherit; color: var(--text2); outline: none; cursor: pointer; }
+    .order-selects select:focus { border-color: var(--orange); }
 
-    .order-num {
-      display: flex; align-items: center; gap: 8px;
-      padding: 10px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0;
-    }
-    .order-num i { font-size: 18px; color: var(--orange); }
-    .order-num span { font-size: 14px; font-weight: 700; }
+    .order-num { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .order-num i { font-size: 17px; color: var(--orange); }
+    .order-num .on-label { font-size: 14px; font-weight: 700; }
+    .cart-badge { margin-left: auto; font-size: 11px; background: var(--orange-light); color: var(--orange); padding: 2px 9px; border-radius: 10px; font-weight: 700; }
 
-    .cart-scroll { flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; }
-
-    .empty-order { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text3); gap: 10px; }
-    .empty-order i { font-size: 36px; color: var(--border2); }
+    .cart-scroll { flex: 1; overflow-y: auto; padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; }
+    .empty-order { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text3); gap: 8px; text-align: center; }
+    .empty-order i { font-size: 34px; color: var(--border2); }
     .empty-order p { font-size: 13px; }
+    .empty-order small { font-size: 11px; }
 
-    .order-item {
-      border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px;
-    }
-    .oi-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
-    .oi-name  { font-size: 13px; font-weight: 600; }
-    .oi-price { font-size: 13px; color: var(--orange); font-weight: 600; white-space: nowrap; }
+    .order-item { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; }
+    .oi-top  { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px; }
+    .oi-name { font-size: 13px; font-weight: 600; line-height: 1.3; }
+    .rm-btn  { background: none; border: none; color: var(--text3); cursor: pointer; padding: 0; font-size: 15px; flex-shrink: 0; }
+    .rm-btn:hover { color: var(--red); background: none; }
+    .oi-price { font-size: 12px; color: var(--orange); font-weight: 600; margin: 4px 0 8px; }
     .oi-price .unit { color: var(--text3); font-weight: 400; }
-    .rm-item-btn { background: none; border: none; color: var(--text3); cursor: pointer; padding: 0; font-size: 15px; }
-    .rm-item-btn:hover { color: var(--red); background: none; }
-
     .oi-bottom { display: flex; align-items: center; justify-content: space-between; }
-    .qty-ctrl { display: flex; align-items: center; gap: 8px; }
-    .qbtn {
-      width: 26px; height: 26px; border-radius: 6px;
-      border: 1.5px solid var(--border2); background: #fff;
-      font-size: 16px; display: flex; align-items: center; justify-content: center;
-      cursor: pointer; color: var(--text); padding: 0; line-height: 1;
-    }
+    .qty-ctrl { display: flex; align-items: center; gap: 7px; }
+    .qbtn { width: 26px; height: 26px; border-radius: 6px; border: 1.5px solid var(--border2); background: #fff; font-size: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text); padding: 0; transition: all 0.1s; }
     .qbtn:hover { background: var(--orange); border-color: var(--orange); color: #fff; }
     .qnum { font-size: 14px; font-weight: 700; min-width: 20px; text-align: center; }
-    .add-note-btn { font-size: 11px; color: var(--text3); background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 3px; font-family: inherit; }
-    .add-note-btn:hover { color: var(--orange); background: none; }
+    .note-btn { font-size: 11px; color: var(--text3); background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 3px; font-family: inherit; }
+    .note-btn:hover { color: var(--orange); background: none; }
 
-    /* summary */
-    .order-summary { border-top: 1px solid var(--border); padding: 12px 16px; flex-shrink: 0; }
-
-    .sum-row { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; }
+    /* SUMMARY */
+    .order-summary { border-top: 1px solid var(--border); padding: 10px 14px; flex-shrink: 0; }
+    .sum-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding: 4px 0; }
     .sum-row .sl { color: var(--text2); }
-    .sum-row .sv { font-weight: 500; }
+    .disc-row { display: flex; align-items: center; gap: 6px; }
+    .disc-row input { width: 65px; padding: 4px 8px; border: 1px solid var(--border2); border-radius: 6px; font-size: 12px; background: var(--bg); color: var(--text); outline: none; font-family: inherit; }
+    .disc-row input:focus { border-color: var(--orange); }
+    .disc-apply { font-size: 11px; padding: 4px 8px; background: var(--orange-light); color: var(--orange); border: 1px solid rgba(249,115,22,0.3); border-radius: 6px; cursor: pointer; font-weight: 700; font-family: inherit; }
+    .disc-apply:hover { background: var(--orange); color: #fff; }
     .sum-row.total-row { font-size: 16px; font-weight: 700; padding-top: 8px; border-top: 1.5px solid var(--border); margin-top: 4px; }
 
-    .disc-inline { display: flex; align-items: center; gap: 6px; }
-    .disc-inline input { width: 70px; padding: 4px 8px; border: 1px solid var(--border2); border-radius: 6px; font-size: 12px; background: var(--bg); color: var(--text); outline: none; font-family: inherit; }
-    .disc-inline input:focus { border-color: var(--orange); }
-    .disc-btn { font-size: 11px; padding: 4px 8px; background: var(--orange-light); color: var(--orange); border: 1px solid rgba(249,115,22,0.3); border-radius: 6px; cursor: pointer; font-family: inherit; font-weight: 600; }
-    .disc-btn:hover { background: var(--orange); color: #fff; }
-
-    /* pay mode */
-    .pay-section { padding: 10px 16px 0; border-top: 1px solid var(--border); flex-shrink: 0; }
-    .pay-label { font-size: 11px; font-weight: 600; color: var(--text2); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
-    .pay-row { display: flex; gap: 8px; }
-    .pay-chip {
-      flex: 1; padding: 8px 4px; text-align: center;
-      border: 1.5px solid var(--border2); border-radius: 8px;
-      cursor: pointer; transition: all 0.12s; background: #fff;
-    }
+    /* PAY */
+    .pay-section { padding: 10px 14px 0; border-top: 1px solid var(--border); flex-shrink: 0; }
+    .pay-label { font-size: 10px; font-weight: 700; color: var(--text2); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 7px; }
+    .pay-row { display: flex; gap: 7px; }
+    .pay-chip { flex: 1; padding: 8px 4px; text-align: center; border: 1.5px solid var(--border2); border-radius: 8px; cursor: pointer; transition: all 0.12s; background: #fff; }
     .pay-chip i   { font-size: 18px; display: block; margin-bottom: 3px; color: var(--text2); }
-    .pay-chip .pc-lbl { font-size: 11px; font-weight: 600; color: var(--text2); }
+    .pay-chip .pc-lbl { font-size: 11px; font-weight: 700; color: var(--text2); }
     .pay-chip.sel-cash { border-color: var(--green);  background: var(--green-light); }
     .pay-chip.sel-cash i, .pay-chip.sel-cash .pc-lbl { color: var(--green); }
     .pay-chip.sel-upi  { border-color: var(--purple); background: var(--purple-light); }
@@ -332,45 +199,115 @@
     .pay-chip.sel-card { border-color: var(--blue);   background: var(--blue-light); }
     .pay-chip.sel-card i, .pay-chip.sel-card .pc-lbl { color: var(--blue); }
 
-    /* action buttons */
-    .action-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px 16px 16px; flex-shrink: 0; }
-    .abtn {
-      padding: 11px; font-size: 13px; font-weight: 700; border-radius: var(--radius-sm);
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-      cursor: pointer; font-family: inherit; border: none; transition: opacity 0.12s, transform 0.1s;
-    }
+    /* ACTION BTNS */
+    .action-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px 14px 14px; flex-shrink: 0; }
+    .abtn { padding: 11px; font-size: 13px; font-weight: 700; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; gap: 5px; cursor: pointer; font-family: inherit; border: none; transition: opacity 0.12s, transform 0.1s; }
     .abtn:active { transform: scale(0.97); }
-    .abtn.kot  { background: #1f2937; color: #fff; grid-column: 1 / -1; }
+    .abtn.kot       { background: #1f2937; color: #fff; grid-column: 1 / -1; }
     .abtn.kot:hover { opacity: 0.88; }
-    .abtn.draft { background: #fff; color: var(--text); border: 1.5px solid var(--border2); }
+    .abtn.draft     { background: #fff; color: var(--text); border: 1.5px solid var(--border2); }
     .abtn.draft:hover { background: var(--bg); }
-    .abtn.bill-pay { background: var(--orange); color: #fff; }
-    .abtn.bill-pay:hover { background: var(--orange-dark); }
+    .abtn.bill-pay  { background: var(--orange); color: #fff; }
+    .abtn.bill-pay:hover  { background: var(--orange-dark); }
     .abtn.bill-print { background: var(--green); color: #fff; }
     .abtn.bill-print:hover { background: #15803d; }
 
-    /* modal */
-    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; align-items: center; justify-content: center; }
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 300; align-items: center; justify-content: center; padding: 16px; }
     .modal-overlay.open { display: flex; }
-    .modal { background: #fff; border-radius: 16px; padding: 28px; width: 380px; max-width: 95vw; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+    .modal { background: #fff; border-radius: 16px; padding: 24px; width: 100%; max-width: 380px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); max-height: 90vh; overflow-y: auto; }
     .modal-top { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
-    .modal-top .m-icon { width: 38px; height: 38px; background: var(--orange-light); border-radius: 9px; display: flex; align-items: center; justify-content: center; }
-    .modal-top .m-icon i { font-size: 19px; color: var(--orange); }
+    .modal-top .m-icon { width: 36px; height: 36px; background: var(--orange-light); border-radius: 9px; display: flex; align-items: center; justify-content: center; }
+    .modal-top .m-icon i { font-size: 18px; color: var(--orange); }
     .modal-top h2 { font-size: 17px; font-weight: 700; }
-    .inv-meta { font-size: 12px; color: var(--text2); margin-bottom: 16px; margin-top: 4px; line-height: 1.7; }
+    .inv-meta { font-size: 12px; color: var(--text2); margin-bottom: 14px; margin-top: 4px; line-height: 1.7; }
     .inv-line { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-bottom: 1px solid var(--border); }
     .inv-total { display: flex; justify-content: space-between; font-size: 17px; font-weight: 700; padding: 12px 0 0; }
     .inv-total span:last-child { color: var(--orange); }
-    .pay-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; margin-top: 12px; }
-    .m-actions { display: flex; gap: 10px; margin-top: 18px; }
+    .pay-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 20px; margin-top: 10px; }
+    .m-actions { display: flex; gap: 8px; margin-top: 16px; }
     .m-actions button { flex: 1; padding: 11px; font-size: 14px; font-weight: 600; border-radius: var(--radius-sm); font-family: inherit; cursor: pointer; border: 1.5px solid var(--border2); background: #fff; color: var(--text); }
     .m-actions .m-print { background: var(--orange); color: #fff; border-color: var(--orange); display: flex; align-items: center; justify-content: center; gap: 6px; }
     .m-actions .m-print:hover { background: var(--orange-dark); }
 
-    /* scrollbar */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: transparent; }
+    /* ─── MOBILE ─── */
+    .mobile-cart-fab { display: none; }
+    .mob-nav { display: none; }
+    .mob-view-toggle { display: none; }
+
+    @media (max-width: 700px) {
+      /* login */
+      .login-left { display: none; }
+      .login-right { width: 100%; padding: 32px 24px; }
+      .login-form h2 { font-size: 22px; }
+
+      /* topbar */
+      .topbar { padding: 0 16px; }
+      .brand-sub, .topbar-date { display: none; }
+
+      /* stats */
+      .stats-strip { padding: 12px 16px 0; gap: 10px; }
+      .scard { min-width: 120px; padding: 10px 12px; }
+      .s-val { font-size: 16px; }
+
+      /* pos layout → tabs */
+      .pos-layout {
+        display: flex; flex-direction: column;
+        height: auto; padding: 0; gap: 0;
+      }
+
+      .prod-panel {
+        border: none; border-radius: 0;
+        display: none; flex-direction: column;
+        height: calc(100vh - 56px - 100px - 56px);
+      }
+      .prod-panel.mob-active { display: flex; }
+
+      .order-panel {
+        border: none; border-radius: 0;
+        display: none; flex-direction: column;
+        height: calc(100vh - 56px - 100px - 56px);
+      }
+      .order-panel.mob-active { display: flex; }
+
+      /* mobile bottom nav tabs */
+      .mob-nav {
+        display: flex; position: fixed; bottom: 0; left: 0; right: 0;
+        background: #fff; border-top: 1px solid var(--border);
+        z-index: 200; height: 60px;
+      }
+      .mob-tab {
+        flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        gap: 3px; font-size: 11px; font-weight: 600; color: var(--text3);
+        cursor: pointer; border: none; background: none; font-family: inherit;
+        position: relative; transition: color 0.12s;
+      }
+      .mob-tab i { font-size: 22px; }
+      .mob-tab.active { color: var(--orange); }
+      .mob-tab .tab-dot { position: absolute; top: 8px; right: calc(50% - 18px); width: 18px; height: 18px; background: var(--orange); border-radius: 50%; font-size: 10px; font-weight: 700; color: #fff; display: none; align-items: center; justify-content: center; }
+      .mob-tab .tab-dot.show { display: flex; }
+
+      /* mobile padding at bottom */
+      #app-screen { padding-bottom: 60px; }
+
+      .prod-grid { grid-template-columns: repeat(2, 1fr); }
+
+      /* order panel mobile adjustments */
+      .order-panel .order-header { padding: 12px 16px; }
+      .order-panel .cart-scroll  { padding: 10px 16px; }
+      .order-panel .order-summary { padding: 10px 16px; }
+      .order-panel .pay-section  { padding: 10px 16px 0; }
+      .order-panel .action-btns  { padding: 10px 16px 14px; }
+      .order-panel .order-num    { padding: 10px 16px; }
+
+      .prod-toolbar { padding: 12px 16px; }
+      .cats         { padding: 10px 16px; }
+      .prod-grid-wrap { padding: 12px 16px; }
+    }
+
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
     ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
   </style>
 </head>
 <body>
@@ -398,7 +335,7 @@
         <label>Email address</label>
         <div class="input-wrap">
           <i class="ti ti-mail ico"></i>
-          <input type="email" id="login-email" placeholder="Enter your email" />
+          <input type="email" id="login-email" placeholder="Enter your email" autocomplete="email" />
         </div>
       </div>
 
@@ -406,7 +343,7 @@
         <label>Password</label>
         <div class="input-wrap">
           <i class="ti ti-lock ico"></i>
-          <input type="password" id="login-pass" placeholder="Enter your password" />
+          <input type="password" id="login-pass" placeholder="Enter your password" autocomplete="current-password" />
           <button class="eye-btn" onclick="togglePass()" tabindex="-1"><i class="ti ti-eye" id="eye-icon"></i></button>
         </div>
       </div>
@@ -418,23 +355,19 @@
 </div>
 
 <!-- APP -->
-<div id="app-screen" style="display:none; height:100vh; flex-direction:column; overflow:hidden;">
+<div id="app-screen">
 
   <div class="topbar">
-    <div class="topbar-left">
-      <div class="brand">
-        <div class="dot"><i class="ti ti-hanger"></i></div>
-        <div>
-          <div class="brand-name">Clothing Store Billing</div>
-          <div class="breadcrumb">Dashboard &bull; <span>POS</span></div>
-        </div>
+    <div class="brand">
+      <div class="dot"><i class="ti ti-hanger"></i></div>
+      <div>
+        <div class="brand-name">Clothing Store</div>
+        <div class="brand-sub">Billing POS</div>
       </div>
     </div>
     <div class="topbar-right">
-      <button class="topbar-btn" onclick="newOrder()"><i class="ti ti-plus"></i> New Order</button>
-      <button class="topbar-btn"><i class="ti ti-list"></i> Draft List</button>
-      <button class="topbar-btn" id="header-date-btn"><i class="ti ti-calendar"></i> <span id="header-date"></span></button>
-      <div class="avatar" title="Logout" onclick="logout()">M <div class="online-dot"></div></div>
+      <span class="topbar-date" id="header-date"></span>
+      <div class="avatar" title="Logout" onclick="logout()">M<div class="online-dot"></div></div>
     </div>
   </div>
 
@@ -453,17 +386,17 @@
     </div>
   </div>
 
-  <div class="pos-layout" style="flex:1; overflow:hidden; margin-top:14px;">
+  <div class="pos-layout" style="margin-top:14px;">
 
     <!-- Products -->
-    <div class="prod-panel">
+    <div class="prod-panel mob-active" id="prod-panel">
       <div class="prod-toolbar">
         <div class="search-box">
           <i class="ti ti-search"></i>
-          <input type="text" id="search-input" placeholder="Search in products" oninput="applyFilters()" />
+          <input type="text" id="search-input" placeholder="Search products..." oninput="applyFilters()" />
         </div>
       </div>
-      <div class="cats" id="cat-row">
+      <div class="cats">
         <button class="cat-pill active" onclick="setFilter('all',this)">Show All</button>
         <button class="cat-pill" onclick="setFilter('shirts',this)">Shirts</button>
         <button class="cat-pill" onclick="setFilter('tops',this)">Tops</button>
@@ -477,78 +410,84 @@
     </div>
 
     <!-- Order -->
-    <div class="order-panel">
+    <div class="order-panel" id="order-panel">
       <div class="order-header">
-        <div class="order-search">
-          <i class="ti ti-search"></i>
-          <input type="text" placeholder="Search existing customer" />
-        </div>
-        <div style="display:flex; gap:8px; margin-bottom:10px;">
-          <input type="text" id="cust-name" placeholder="Customer name" style="flex:1; padding:8px 12px; border:1.5px solid var(--border2); border-radius:8px; font-size:13px; background:var(--bg); color:var(--text); outline:none; font-family:inherit;" />
-          <input type="text" id="cust-phone" placeholder="Phone" style="width:120px; padding:8px 12px; border:1.5px solid var(--border2); border-radius:8px; font-size:13px; background:var(--bg); color:var(--text); outline:none; font-family:inherit;" />
+        <div class="cust-row">
+          <input type="text" id="cust-name" placeholder="Customer name" />
+          <input type="text" id="cust-phone" placeholder="Phone" style="max-width:130px;" />
         </div>
         <div class="order-selects">
-          <div class="order-select">
-            <select><option>Select Dining</option><option>Dine In</option><option>Home Delivery</option><option>Walk In</option></select>
-          </div>
-          <div class="order-select">
-            <select><option>Select Table</option><option>Table 1</option><option>Table 2</option><option>Counter</option></select>
-          </div>
+          <select><option>Select Dining</option><option>Dine In</option><option>Home Delivery</option><option>Walk In</option></select>
+          <select><option>Select Table</option><option>Table 1</option><option>Table 2</option><option>Counter</option></select>
         </div>
       </div>
 
       <div class="order-num">
         <i class="ti ti-shopping-bag"></i>
-        <span id="order-label">Order #<span id="order-num">1</span></span>
-        <span id="cart-count" style="margin-left:auto; font-size:11px; background:var(--orange-light); color:var(--orange); padding:2px 9px; border-radius:10px; font-weight:600;"></span>
+        <span class="on-label">Order #<span id="order-num">1</span></span>
+        <span class="cart-badge" id="cart-count" style="display:none;"></span>
       </div>
 
       <div class="cart-scroll" id="cart-list">
         <div class="empty-order">
           <i class="ti ti-shopping-cart"></i>
           <p>No items added yet</p>
-          <p style="font-size:11px;">Click a product to add it here</p>
+          <small>Tap a product to add it here</small>
         </div>
       </div>
 
       <div class="order-summary">
-        <div class="sum-row"><span class="sl">Sub total :</span><span class="sv" id="subtotal">₹0</span></div>
+        <div class="sum-row"><span class="sl">Sub total :</span><span id="subtotal" style="font-weight:500;">₹0</span></div>
         <div class="sum-row">
           <span class="sl">Discount :</span>
-          <span class="sv">
-            <div class="disc-inline">
-              <input type="text" id="discount-input" placeholder="0%" />
-              <button class="disc-btn" onclick="applyDiscount()">Apply</button>
-              <span id="discount-disp" style="color:var(--green); font-size:12px;">—</span>
-            </div>
-          </span>
+          <div class="disc-row">
+            <input type="text" id="discount-input" placeholder="0%" />
+            <button class="disc-apply" onclick="applyDiscount()">Apply</button>
+            <span id="discount-disp" style="color:var(--green);font-size:12px;font-weight:600;">—</span>
+          </div>
         </div>
-        <div class="sum-row"><span class="sl">GST (18%) :</span><span class="sv" id="gst-disp">₹0</span></div>
+        <div class="sum-row"><span class="sl">GST (18%) :</span><span id="gst-disp" style="font-weight:500;">₹0</span></div>
         <div class="sum-row total-row"><span>Total :</span><span id="total-disp">₹0</span></div>
       </div>
 
       <div class="pay-section">
         <div class="pay-label">Payment Mode</div>
         <div class="pay-row">
-          <div class="pay-chip" id="pay-cash" onclick="selectPay('cash')">
-            <i class="ti ti-cash"></i><div class="pc-lbl">Cash</div>
-          </div>
-          <div class="pay-chip" id="pay-upi" onclick="selectPay('upi')">
-            <i class="ti ti-qrcode"></i><div class="pc-lbl">UPI</div>
-          </div>
-          <div class="pay-chip" id="pay-card" onclick="selectPay('card')">
-            <i class="ti ti-credit-card"></i><div class="pc-lbl">Card</div>
-          </div>
+          <div class="pay-chip" id="pay-cash" onclick="selectPay('cash')"><i class="ti ti-cash"></i><div class="pc-lbl">Cash</div></div>
+          <div class="pay-chip" id="pay-upi"  onclick="selectPay('upi')"><i class="ti ti-qrcode"></i><div class="pc-lbl">UPI</div></div>
+          <div class="pay-chip" id="pay-card" onclick="selectPay('card')"><i class="ti ti-credit-card"></i><div class="pc-lbl">Card</div></div>
         </div>
       </div>
 
       <div class="action-btns">
-        <button class="abtn kot" onclick="checkout()"><i class="ti ti-printer"></i> Bill & Print</button>
-        <button class="abtn draft" onclick="newOrder()"><i class="ti ti-file"></i> Draft</button>
-        <button class="abtn bill-pay" onclick="checkout()"><i class="ti ti-wallet"></i> Bill & Payment</button>
+        <button class="abtn kot"        onclick="checkout()"><i class="ti ti-printer"></i> Bill & Print</button>
+        <button class="abtn draft"      onclick="newOrder()"><i class="ti ti-file"></i> New Order</button>
+        <button class="abtn bill-pay"   onclick="checkout()"><i class="ti ti-wallet"></i> Bill & Pay</button>
         <button class="abtn bill-print" onclick="checkout()"><i class="ti ti-receipt"></i> Generate Bill</button>
       </div>
     </div>
+  </div>
+
+  <!-- Mobile bottom nav -->
+  <div class="mob-nav">
+    <button class="mob-tab active" id="tab-products" onclick="switchTab('products')">
+      <div class="tab-dot" id="tab-dot-products"></div>
+      <i class="ti ti-shirt"></i>
+      Products
+    </button>
+    <button class="mob-tab" id="tab-order" onclick="switchTab('order')">
+      <div class="tab-dot" id="tab-dot-order"></div>
+      <i class="ti ti-shopping-cart"></i>
+      Cart
+    </button>
+    <button class="mob-tab" onclick="checkout()">
+      <i class="ti ti-receipt"></i>
+      Bill
+    </button>
+    <button class="mob-tab" onclick="logout()">
+      <i class="ti ti-logout"></i>
+      Logout
+    </button>
   </div>
 </div>
 
@@ -578,21 +517,23 @@
     const pass  = document.getElementById('login-pass').value;
     const err   = document.getElementById('login-error');
     if (email === CREDS.email && pass === CREDS.password) {
-      document.getElementById('login-screen').style.display  = 'none';
-      document.getElementById('app-screen').style.display    = 'flex';
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app-screen').style.display   = 'block';
       err.style.display = 'none';
     } else {
       err.style.display = 'block';
     }
   }
 
-  document.addEventListener('keydown', e => { if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') doLogin(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && document.getElementById('login-screen').style.display !== 'none') doLogin();
+  });
 
   function togglePass() {
     const inp = document.getElementById('login-pass');
     const ico = document.getElementById('eye-icon');
-    if (inp.type === 'password') { inp.type = 'text'; ico.className = 'ti ti-eye-off'; }
-    else { inp.type = 'password'; ico.className = 'ti ti-eye'; }
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+    ico.className = inp.type === 'password' ? 'ti ti-eye' : 'ti ti-eye-off';
   }
 
   function logout() {
@@ -601,6 +542,26 @@
     document.getElementById('app-screen').style.display   = 'none';
     document.getElementById('login-email').value = '';
     document.getElementById('login-pass').value  = '';
+  }
+
+  /* mobile tab switching */
+  function switchTab(tab) {
+    const prodPanel  = document.getElementById('prod-panel');
+    const orderPanel = document.getElementById('order-panel');
+    const tabProd    = document.getElementById('tab-products');
+    const tabOrder   = document.getElementById('tab-order');
+
+    if (tab === 'products') {
+      prodPanel.classList.add('mob-active');
+      orderPanel.classList.remove('mob-active');
+      tabProd.classList.add('active');
+      tabOrder.classList.remove('active');
+    } else {
+      orderPanel.classList.add('mob-active');
+      prodPanel.classList.remove('mob-active');
+      tabOrder.classList.add('active');
+      tabProd.classList.remove('active');
+    }
   }
 
   const products = [
@@ -629,25 +590,26 @@
     card: { label:"Card", icon:"ti-credit-card", style:"background:#eff6ff;color:#2563eb;" },
   };
 
-  let cart = [], discountPct = 0, selectedPay = null, activeFilter = 'all', billCount = 0;
-  let totalSales = 0, totalBills = 0, totalItems = 0;
+  let cart = [], discountPct = 0, selectedPay = null, activeFilter = 'all';
+  let totalSales = 0, totalBills = 0, totalItems = 0, orderNum = 1;
 
   document.getElementById('header-date').textContent =
-    new Date().toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+    new Date().toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short' });
 
   function renderProducts(list) {
     document.getElementById('product-grid').innerHTML = !list.length
-      ? `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text3);"><i class="ti ti-search" style="font-size:32px;display:block;margin-bottom:8px;"></i>No products found</div>`
+      ? `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text3);">
+           <i class="ti ti-search" style="font-size:32px;display:block;margin-bottom:8px;"></i>No products found
+         </div>`
       : list.map(p => `
-        <div class="prod-card pc-${p.cat}" onclick="addToCart(${p.id})">
-          <div class="prod-img">${p.emoji}</div>
-          <div class="prod-info">
-            <div class="prod-name">${p.name}</div>
-            <div class="prod-price">₹${p.price.toLocaleString('en-IN')}</div>
-          </div>
-          <div class="add-circle">+</div>
-        </div>
-      `).join('');
+          <div class="prod-card pc-${p.cat}" onclick="addToCart(${p.id})">
+            <div class="prod-img">${p.emoji}</div>
+            <div class="prod-info">
+              <div class="prod-name">${p.name}</div>
+              <div class="prod-price">₹${p.price.toLocaleString('en-IN')}</div>
+            </div>
+            <div class="add-circle">+</div>
+          </div>`).join('');
   }
 
   function setFilter(cat, el) {
@@ -670,6 +632,9 @@
     const ex = cart.find(x => x.id === id);
     if (ex) ex.qty++; else cart.push({ ...p, qty: 1 });
     renderCart();
+    if (window.innerWidth <= 700) {
+      switchTab('order');
+    }
   }
 
   function updateQty(id, delta) {
@@ -682,28 +647,42 @@
 
   function renderCart() {
     const count = cart.reduce((s, x) => s + x.qty, 0);
-    document.getElementById('cart-count').textContent = count ? `${count} item${count !== 1 ? 's' : ''}` : '';
+    const badge = document.getElementById('cart-count');
+    const tabDot = document.getElementById('tab-dot-order');
+    if (count) {
+      badge.textContent = `${count} item${count !== 1 ? 's' : ''}`;
+      badge.style.display = 'inline-block';
+      tabDot.textContent = count;
+      tabDot.classList.add('show');
+    } else {
+      badge.style.display = 'none';
+      tabDot.classList.remove('show');
+    }
+
     const el = document.getElementById('cart-list');
     if (!cart.length) {
-      el.innerHTML = `<div class="empty-order"><i class="ti ti-shopping-cart"></i><p>No items added yet</p><p style="font-size:11px;">Click a product to add it here</p></div>`;
+      el.innerHTML = `<div class="empty-order">
+        <i class="ti ti-shopping-cart"></i>
+        <p>No items added yet</p>
+        <small>Tap a product to add it here</small>
+      </div>`;
     } else {
       el.innerHTML = cart.map(item => `
         <div class="order-item">
           <div class="oi-top">
             <div class="oi-name">${item.emoji} ${item.name}</div>
-            <button class="rm-item-btn" onclick="cart=cart.filter(x=>x.id!==${item.id});renderCart()"><i class="ti ti-trash"></i></button>
+            <button class="rm-btn" onclick="cart=cart.filter(x=>x.id!==${item.id});renderCart()"><i class="ti ti-trash"></i></button>
           </div>
           <div class="oi-price"><span class="unit">₹${item.price.toLocaleString('en-IN')} × ${item.qty} = </span>₹${(item.price*item.qty).toLocaleString('en-IN')}</div>
-          <div class="oi-bottom" style="margin-top:8px;">
+          <div class="oi-bottom">
             <div class="qty-ctrl">
               <button class="qbtn" onclick="updateQty(${item.id},-1)">−</button>
               <span class="qnum">${item.qty}</span>
               <button class="qbtn" onclick="updateQty(${item.id},1)">+</button>
             </div>
-            <button class="add-note-btn"><i class="ti ti-notes"></i> Add Notes</button>
+            <button class="note-btn"><i class="ti ti-notes"></i> Add Notes</button>
           </div>
-        </div>
-      `).join('');
+        </div>`).join('');
     }
     updateSummary();
   }
@@ -714,10 +693,10 @@
     const after = sub - disc;
     const gst   = Math.round(after * 0.18);
     const total = after + gst;
-    document.getElementById('subtotal').textContent     = `₹${sub.toLocaleString('en-IN')}`;
+    document.getElementById('subtotal').textContent      = `₹${sub.toLocaleString('en-IN')}`;
     document.getElementById('discount-disp').textContent = disc > 0 ? `−₹${disc.toLocaleString('en-IN')}` : '—';
-    document.getElementById('gst-disp').textContent     = `₹${gst.toLocaleString('en-IN')}`;
-    document.getElementById('total-disp').textContent   = `₹${total.toLocaleString('en-IN')}`;
+    document.getElementById('gst-disp').textContent      = `₹${gst.toLocaleString('en-IN')}`;
+    document.getElementById('total-disp').textContent    = `₹${total.toLocaleString('en-IN')}`;
   }
 
   function applyDiscount() {
@@ -738,8 +717,8 @@
     document.getElementById('cust-name').value  = '';
     document.getElementById('cust-phone').value = '';
     ['cash','upi','card'].forEach(m => document.getElementById('pay-' + m).className = 'pay-chip');
-    billCount++;
-    document.getElementById('order-num').textContent = billCount + 1;
+    orderNum++;
+    document.getElementById('order-num').textContent = orderNum;
     renderCart();
   }
 
