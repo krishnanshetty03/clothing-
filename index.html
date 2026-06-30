@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clothing Store Billing</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f5f4;
+      --surface: #ffffff;
+      --surface2: #f1efe8;
+      --border: rgba(0,0,0,0.12);
+      --border-md: rgba(0,0,0,0.22);
+      --text: #1a1a1a;
+      --text2: #6b6b6b;
+      --text3: #9a9a9a;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --success: #085041;
+      --success-bg: #e1f5ee;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a18;
+        --surface: #242422;
+        --surface2: #2c2c2a;
+        --border: rgba(255,255,255,0.1);
+        --border-md: rgba(255,255,255,0.2);
+        --text: #f0ede8;
+        --text2: #a0a09a;
+        --text3: #666660;
+        --success: #9fe1cb;
+        --success-bg: #04342c;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 0.5px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 500;
+    }
+
+    header .brand i { font-size: 22px; color: var(--text2); }
+
+    header .date {
+      font-size: 13px;
+      color: var(--text2);
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 16px 24px 0;
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+    }
+
+    .stat .s-label {
+      font-size: 12px;
+      color: var(--text2);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .stat .s-value {
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 16px;
+      padding: 16px 24px 24px;
+    }
+
+    .left, .right { display: flex; flex-direction: column; gap: 12px; }
+
+    .card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text2);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 0.5px solid var(--border-md);
+      border-radius: var(--radius-md);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    input:focus { border-color: var(--text2); }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
+      border-radius: var(--radius-md);
+      border: 0.5px solid var(--border-md);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 13px;
+      padding: 8px 14px;
+      transition: background 0.12s;
+    }
+
+    button:hover { background: var(--surface2); }
+
+    .customer-row { display: flex; gap: 8px; }
+    .customer-row input:last-child { max-width: 140px; }
+
+    .search-row { display: flex; gap: 8px; margin-bottom: 14px; }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 8px;
+    }
+
+    .product-card {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .product-card:hover { border-color: var(--border-md); background: var(--surface2); }
+
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-bottom: 7px;
+    }
+
+    .tag-shirts { background: #eeedfe; color: #3c3489; }
+    .tag-tops   { background: #fbeaf0; color: #72243e; }
+    .tag-pants  { background: #e1f5ee; color: #085041; }
+    .tag-shoes  { background: #e6f1fb; color: #0c447c; }
+    .tag-acc    { background: #faeeda; color: #633806; }
+
+    @media (prefers-color-scheme: dark) {
+      .tag-shirts { background: #26215c; color: #afa9ec; }
+      .tag-tops   { background: #4b1528; color: #ed93b1; }
+      .tag-pants  { background: #04342c; color: #5dcaa5; }
+      .tag-shoes  { background: #042c53; color: #85b7eb; }
+      .tag-acc    { background: #412402; color: #ef9f27; }
+    }
+
+    .product-card .p-name { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+    .product-card .p-price { font-size: 12px; color: var(--text2); }
+    .product-card .p-add { margin-top: 10px; width: 100%; font-size: 12px; padding: 6px; }
+
+    .cart-items { display: flex; flex-direction: column; gap: 8px; max-height: 240px; overflow-y: auto; }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    .cart-item .ci-info { flex: 1; }
+    .cart-item .ci-name { font-size: 13px; font-weight: 500; }
+    .cart-item .ci-price { font-size: 12px; color: var(--text2); }
+
+    .qty-ctrl { display: flex; align-items: center; gap: 6px; }
+    .qty-btn {
+      width: 26px; height: 26px;
+      border: 0.5px solid var(--border-md);
+      border-radius: 6px;
+      background: none;
+      font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text);
+      padding: 0;
+    }
+    .qty-btn:hover { background: var(--surface2); }
+    .qty-num { font-size: 13px; font-weight: 500; min-width: 18px; text-align: center; }
+    .rm-btn { background: none; border: none; color: var(--text3); font-size: 16px; padding: 2px; }
+    .rm-btn:hover { color: #e24b4a; background: none; }
+
+    .divider { height: 0.5px; background: var(--border); margin: 10px 0; }
+
+    .summary-row { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 0; }
+    .summary-row .lbl { color: var(--text2); }
+    .summary-row.total { font-size: 16px; font-weight: 500; padding-top: 8px; }
+
+    .discount-row { display: flex; gap: 8px; margin-bottom: 4px; }
+    .discount-row input { font-size: 13px; }
+    .discount-row button { font-size: 13px; white-space: nowrap; }
+
+    .pay-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .pay-btn {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 6px;
+      text-align: center;
+      background: var(--surface);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .pay-btn i { font-size: 22px; display: block; margin-bottom: 5px; color: var(--text2); }
+    .pay-btn .pl { font-size: 12px; font-weight: 500; color: var(--text); }
+
+    .pay-btn.sel-cash { border-color: #1d9e75; background: #e1f5ee; }
+    .pay-btn.sel-cash i, .pay-btn.sel-cash .pl { color: #085041; }
+    .pay-btn.sel-upi  { border-color: #534ab7; background: #eeedfe; }
+    .pay-btn.sel-upi i, .pay-btn.sel-upi .pl  { color: #3c3489; }
+    .pay-btn.sel-card { border-color: #185fa5; background: #e6f1fb; }
+    .pay-btn.sel-card i, .pay-btn.sel-card .pl { color: #0c447c; }
+
+    @media (prefers-color-scheme: dark) {
+      .pay-btn.sel-cash { border-color: #5dcaa5; background: #04342c; }
+      .pay-btn.sel-cash i, .pay-btn.sel-cash .pl { color: #9fe1cb; }
+      .pay-btn.sel-upi  { border-color: #afa9ec; background: #26215c; }
+      .pay-btn.sel-upi i, .pay-btn.sel-upi .pl  { color: #ceecf6; }
+      .pay-btn.sel-card { border-color: #85b7eb; background: #042c53; }
+      .pay-btn.sel-card i, .pay-btn.sel-card .pl { color: #b5d4f4; }
+    }
+
+    .bill-btn {
+      width: 100%;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: var(--radius-md);
+      background: var(--text);
+      color: var(--surface);
+      border: none;
+      cursor: pointer;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: opacity 0.15s;
+    }
+    .bill-btn:hover { opacity: 0.85; background: var(--text); }
+
+    .empty-cart { text-align: center; padding: 28px 16px; color: var(--text2); font-size: 13px; }
+    .empty-cart i { font-size: 30px; display: block; margin-bottom: 8px; }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 0.5px solid var(--border);
+      padding: 24px;
+      width: 360px;
+      max-width: 95vw;
+    }
+    .modal h2 { font-size: 17px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+    .inv-meta { font-size: 12px; color: var(--text2); margin-bottom: 16px; margin-top: 4px; line-height: 1.6; }
+    .inv-line { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; border-bottom: 0.5px solid var(--border); }
+    .inv-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 500; padding: 12px 0 0; }
+    .pay-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 10px;
+    }
+    .modal-actions { display: flex; gap: 8px; margin-top: 16px; }
+    .modal-actions button { flex: 1; padding: 10px; }
+    .print-btn {
+      background: var(--text);
+      color: var(--surface);
+      border: none;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .print-btn:hover { opacity: 0.85; background: var(--text); }
+
+    @media (max-width: 720px) {
+      main { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: repeat(3, 1fr); padding: 12px 16px 0; }
+      header, main { padding-left: 16px; padding-right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <i class="ti ti-hanger"></i>
+    Clothing Store Billing
+  </div>
+  <div class="date" id="header-date"></div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat">
+    <div class="s-label"><i class="ti ti-receipt"></i> Today's sales</div>
+    <div class="s-value" id="stat-sales">₹0</div>
+  </div>
+  <div class="stat">
+    <div class="s-label"><i class="ti ti-shopping-bag"></i> Bills today</div>
+    <div class="s-value" id="stat-bills">0</div>
+  </div>
+  <div class="stat">
+    <div class="s-label"><i class="ti ti-package"></i> Items sold</div>
+    <div class="s-value" id="stat-items">0</div>
+  </div>
+</div>
+
+<main>
+  <div class="left">
+    <div class="card">
+      <div class="section-title"><i class="ti ti-user"></i> Customer</div>
+      <div class="customer-row">
+        <input type="text" id="cust-name" placeholder="Customer name" />
+        <input type="text" id="cust-phone" placeholder="Phone number" />
+      </div>
+    </div>
+
+    <div class="card" style="flex: 1;">
+      <div class="section-title"><i class="ti ti-shirt"></i> Products</div>
+      <div class="search-row">
+        <input type="text" id="search-input" placeholder="Search by name or category..." oninput="filterProducts()" />
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="card" style="flex: 1;">
+      <div class="section-title">
+        <i class="ti ti-shopping-cart"></i> Cart
+        <span id="cart-count" style="font-size:11px; background:var(--surface2); padding:1px 7px; border-radius:10px; margin-left:4px;"></span>
+      </div>
+
+      <div class="cart-items" id="cart-list">
+        <div class="empty-cart"><i class="ti ti-basket"></i>No items added yet</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="discount-row">
+        <input type="text" id="discount-input" placeholder="Discount %" />
+        <button onclick="applyDiscount()">Apply</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="summary-row"><span class="lbl">Subtotal</span><span id="subtotal">₹0</span></div>
+      <div class="summary-row"><span class="lbl">Discount</span><span id="discount-disp" style="color:var(--success);">—</span></div>
+      <div class="summary-row"><span class="lbl">GST (18%)</span><span id="gst-disp">₹0</span></div>
+      <div class="divider"></div>
+      <div class="summary-row total"><span>Total</span><span id="total-disp">₹0</span></div>
+
+      <div class="divider"></div>
+
+      <div class="section-title" style="margin-bottom:10px;"><i class="ti ti-wallet"></i> Payment mode</div>
+      <div class="pay-methods">
+        <div class="pay-btn" id="pay-cash" onclick="selectPay('cash')">
+          <i class="ti ti-cash"></i>
+          <div class="pl">Cash</div>
+        </div>
+        <div class="pay-btn" id="pay-upi" onclick="selectPay('upi')">
+          <i class="ti ti-qrcode"></i>
+          <div class="pl">UPI</div>
+        </div>
+        <div class="pay-btn" id="pay-card" onclick="selectPay('card')">
+          <i class="ti ti-credit-card"></i>
+          <div class="pl">Card</div>
+        </div>
+      </div>
+
+      <button class="bill-btn" onclick="checkout()">
+        <i class="ti ti-check"></i> Generate Bill
+      </button>
+    </div>
+  </div>
+</main>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h2><i class="ti ti-file-invoice"></i> Invoice</h2>
+    <div class="inv-meta" id="inv-meta"></div>
+    <div id="inv-lines"></div>
+    <div class="inv-total" id="inv-total"></div>
+    <div id="inv-pay-badge"></div>
+    <div class="modal-actions">
+      <button onclick="closeModal()"><i class="ti ti-x"></i> Close</button>
+      <button class="print-btn" onclick="window.print()"><i class="ti ti-printer"></i> Print</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const products = [
+    { id:1,  name:"Men's T-shirt",   price:499,  cat:"shirts" },
+    { id:2,  name:"Women's Kurta",   price:899,  cat:"tops"   },
+    { id:3,  name:"Slim Jeans",      price:1299, cat:"pants"  },
+    { id:4,  name:"Cargo Pants",     price:1099, cat:"pants"  },
+    { id:5,  name:"Polo Shirt",      price:649,  cat:"shirts" },
+    { id:6,  name:"Running Shoes",   price:1999, cat:"shoes"  },
+    { id:7,  name:"Leggings",        price:549,  cat:"tops"   },
+    { id:8,  name:"Canvas Sneakers", price:1499, cat:"shoes"  },
+    { id:9,  name:"Leather Belt",    price:349,  cat:"acc"    },
+    { id:10, name:"Cap / Hat",       price:299,  cat:"acc"    },
+    { id:11, name:"Formal Shirt",    price:799,  cat:"shirts" },
+    { id:12, name:"Scarf",           price:399,  cat:"acc"    },
+  ];
+
+  const catLabel = { shirts:"Shirts", tops:"Tops", pants:"Bottoms", shoes:"Shoes", acc:"Accessory" };
+  const catClass  = { shirts:"tag-shirts", tops:"tag-tops", pants:"tag-pants", shoes:"tag-shoes", acc:"tag-acc" };
+
+  const payInfo = {
+    cash: { label:"Cash", icon:"ti-cash", style:"background:#e1f5ee;color:#085041;" },
+    upi:  { label:"UPI",  icon:"ti-qrcode", style:"background:#eeedfe;color:#3c3489;" },
+    card: { label:"Card", icon:"ti-credit-card", style:"background:#e6f1fb;color:#0c447c;" },
+  };
+
+  let cart = [], discountPct = 0, selectedPay = null;
+  let totalSales = 0, billCount = 0, itemsSold = 0;
+
+  document.getElementById('header-date').textContent = new Date().toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+  function renderProducts(list) {
+    document.getElementById('product-grid').innerHTML = list.map(p => `
+      <div class="product-card" onclick="addToCart(${p.id})">
+        <span class="tag ${catClass[p.cat]}">${catLabel[p.cat]}</span>
+        <div class="p-name">${p.name}</div>
+        <div class="p-price">₹${p.price.toLocaleString('en-IN')}</div>
+        <button class="p-add"><i class="ti ti-plus"></i> Add</button>
+      </div>
+    `).join('');
+  }
+
+  function filterProducts() {
+    const q = document.getElementById('search-input').value.toLowerCase();
+    renderProducts(products.filter(p => p.name.toLowerCase().includes(q) || catLabel[p.cat].toLowerCase().includes(q)));
+  }
+
+  function addToCart(id) {
+    const p = products.find(x => x.id === id);
+    const ex = cart.find(x => x.id === id);
+    if (ex) ex.qty++; else cart.push({ ...p, qty: 1 });
+    renderCart();
+  }
+
+  function updateQty(id, delta) {
+    const item = cart.find(x => x.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(x => x.id !== id);
+    renderCart();
+  }
+
+  function renderCart() {
+    const count = cart.reduce((s, x) => s + x.qty, 0);
+    document.getElementById('cart-count').textContent = count ? `${count} item${count !== 1 ? 's' : ''}` : '';
+    const list = document.getElementById('cart-list');
+    if (!cart.length) {
+      list.innerHTML = '<div class="empty-cart"><i class="ti ti-basket"></i>No items added yet</div>';
+    } else {
+      list.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div class="ci-info">
+            <div class="ci-name">${item.name}</div>
+            <div class="ci-price">₹${item.price.toLocaleString('en-IN')} × ${item.qty}</div>
+          </div>
+          <div class="qty-ctrl">
+            <button class="qty-btn" onclick="updateQty(${item.id}, -1)">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+          </div>
+          <button class="rm-btn" onclick="cart=cart.filter(x=>x.id!==${item.id});renderCart()"><i class="ti ti-x"></i></button>
+        </div>
+      `).join('');
+    }
+    updateSummary();
+  }
+
+  function updateSummary() {
+    const sub  = cart.reduce((s, x) => s + x.price * x.qty, 0);
+    const disc = Math.round(sub * discountPct / 100);
+    const after = sub - disc;
+    const gst  = Math.round(after * 0.18);
+    const total = after + gst;
+    document.getElementById('subtotal').textContent    = `₹${sub.toLocaleString('en-IN')}`;
+    document.getElementById('discount-disp').textContent = disc > 0 ? `−₹${disc.toLocaleString('en-IN')}` : '—';
+    document.getElementById('gst-disp').textContent    = `₹${gst.toLocaleString('en-IN')}`;
+    document.getElementById('total-disp').textContent  = `₹${total.toLocaleString('en-IN')}`;
+  }
+
+  function applyDiscount() {
+    const n = parseFloat(document.getElementById('discount-input').value.replace('%', ''));
+    if (!isNaN(n) && n >= 0 && n <= 100) { discountPct = n; updateSummary(); }
+  }
+
+  function selectPay(mode) {
+    selectedPay = mode;
+    ['cash','upi','card'].forEach(m => {
+      document.getElementById('pay-' + m).className = 'pay-btn' + (m === mode ? ' sel-' + m : '');
+    });
+  }
+
+  function checkout() {
+    if (!cart.length)   { alert('Add at least one item to the cart.'); return; }
+    if (!selectedPay)   { alert('Please select a payment mode.'); return; }
+
+    const cust  = document.getElementById('cust-name').value.trim()  || 'Walk-in Customer';
+    const phone = document.getElementById('cust-phone').value.trim();
+    const sub   = cart.reduce((s, x) => s + x.price * x.qty, 0);
+    const disc  = Math.round(sub * discountPct / 100);
+    const after = sub - disc;
+    const gst   = Math.round(after * 0.18);
+    const total = after + gst;
+    const now   = new Date();
+    billCount++;
+    const invoiceNo = `INV-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}-${String(billCount).padStart(3,'0')}`;
+    const pm = payInfo[selectedPay];
+
+    document.getElementById('inv-meta').innerHTML =
+      `<strong>${cust}</strong>${phone ? ' &middot; ' + phone : ''}<br>${invoiceNo} &middot; ${now.toLocaleString('en-IN')}`;
+
+    document.getElementById('inv-lines').innerHTML =
+      cart.map(item =>
+        `<div class="inv-line"><span>${item.name} × ${item.qty}</span><span>₹${(item.price*item.qty).toLocaleString('en-IN')}</span></div>`
+      ).join('') +
+      (disc > 0 ? `<div class="inv-line"><span>Discount (${discountPct}%)</span><span style="color:var(--success)">−₹${disc.toLocaleString('en-IN')}</span></div>` : '') +
+      `<div class="inv-line"><span>GST (18%)</span><span>₹${gst.toLocaleString('en-IN')}</span></div>`;
+
+    document.getElementById('inv-total').innerHTML = `<span>Total</span><span>₹${total.toLocaleString('en-IN')}</span>`;
+    document.getElementById('inv-pay-badge').innerHTML =
+      `<span class="pay-badge" style="${pm.style}"><i class="ti ${pm.icon}"></i> Paid via ${pm.label}</span>`;
+
+    document.getElementById('modal').classList.add('open');
+
+    totalSales += total;
+    itemsSold  += cart.reduce((s, x) => s + x.qty, 0);
+    document.getElementById('stat-sales').textContent = `₹${totalSales.toLocaleString('en-IN')}`;
+    document.getElementById('stat-bills').textContent = billCount;
+    document.getElementById('stat-items').textContent = itemsSold;
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    cart = []; discountPct = 0; selectedPay = null;
+    document.getElementById('discount-input').value = '';
+    document.getElementById('cust-name').value = '';
+    document.getElementById('cust-phone').value = '';
+    ['cash','upi','card'].forEach(m => document.getElementById('pay-' + m).className = 'pay-btn');
+    renderCart();
+  }
+
+  renderProducts(products);
+</script>
+</body>
+</html>
